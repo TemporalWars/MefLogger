@@ -57,15 +57,14 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
             var logger = new LoggerCompositionContainer(); //Composition is performed in the constructor
 
             // Test Writes
-            logger.Logger.WriteItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Warning, "This stupid program crashed at 123xxdr12", null);
-            logger.Logger.WriteItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Information, "Your computer is about to blow up!", null);
-            logger.Logger.WriteItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Error, "What the F#$K are you doing!", null);
+            logger.Logger.WriteItem(LoggerTypeEnum.EntLibLogger, MessageTypeEnum.Warning, "This stupid program crashed at 123xxdr12", null);
+            logger.Logger.WriteItem(LoggerTypeEnum.EntLibLogger, MessageTypeEnum.Information, "Your computer is about to blow up!", null);
+            logger.Logger.WriteItem(LoggerTypeEnum.EntLibLogger, MessageTypeEnum.Error, "What the F#$K are you doing!", null);
 
             // Test Reads
-            var result = logger.Logger.ReadItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Warning);
-            result = logger.Logger.ReadItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Information);
-            result = logger.Logger.ReadItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Error);
-            
+            //var result = logger.Logger.ReadItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Warning);
+            //result = logger.Logger.ReadItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Information);
+            //result = logger.Logger.ReadItem(LoggerTypeEnum.EventLog, MessageTypeEnum.Error);
         }
     }*/
    

@@ -14,6 +14,10 @@ using ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.Interfaces;
 
 namespace ImageNexus.BenScharbach.Common.MEFLogger
 {
+    /// <summary>
+    /// The <see cref="Logger"/> class is the main entry point for the Logger, which exposes the <see cref="ILogger"/> MEF interface.  It also
+    /// exposes the Write/Read methods, which logs a message into the proper MEF Part, contained in the operations dictionary. 
+    /// </summary>
     [Export(typeof(ILogger))]
     class Logger : ILogger
     {
@@ -116,6 +120,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
             logWindowCtl.SetTraceDocumentKey(attributeKeyName, documentId);
         }
 
+        // 12/24/2012 - Add parameter to pass in 'Namespace' name of calling method.
         /// <summary>
         /// Writes a logger message to the current <see cref="MEFLoggerInterfaces.Enums.LoggerTypeEnum"/>.
         /// </summary>
@@ -123,10 +128,12 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
         /// <param name="messageType">Set the type of <see cref="MEFLoggerInterfaces.Enums.MessageTypeEnum"/> to use.</param>
         /// <param name="loggerMessage">Message to save into logger</param>
         /// <param name="loggerOutputPath">Sub-folder location to place logs within the 'ProgramData' folder.</param>
-        public void WriteItem(LoggerTypeEnum loggerType, MessageTypeEnum messageType, string loggerMessage, string loggerOutputPath)
+        /// <param name="namespaceName">Namespace name from calling method</param>
+        public void WriteItem(LoggerTypeEnum loggerType, MessageTypeEnum messageType, string loggerMessage, string loggerOutputPath, string namespaceName)
         {
             VerifyDictionaryIsCreated();
 
+            // check if 'TraceLog'
             if (loggerType == LoggerTypeEnum.TraceLog)
             {
                 if (_traceListenerInstanceId == -1)
@@ -139,6 +146,15 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
                 }
 
                 WriteItem(messageType, loggerMessage, _traceListenerInstanceId);
+                return;
+            }
+
+            // 12/24/2012 - Check if Enterprise Logger part, to pass in 'Namespace' name.
+            if (loggerType == LoggerTypeEnum.EntLibLogger)
+            {
+                LoggerOperationsDictionaryAddMessage(ref loggerType, ref messageType, ref loggerMessage,
+                                                     LogNamespaceMessageCallback,
+                                                     new LoggerOpDictParam {NamespaceName = namespaceName});
                 return;
             }
 
@@ -184,7 +200,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
         /// <param name="loggerType">Set the <see cref="LoggerTypeEnum"/> to use.</param>
         /// <param name="messageType">Set the type of <see cref="MessageTypeEnum"/> to use.</param>
         /// <param name="data">Data to serialize</param>
-        /// <param name="loggerOutputPath"></param>
+        /// <param name="loggerOutputPath">Sub-folder location to place logs within the 'ProgramData' folder.</param>
         public void WriteItem<T>(LoggerTypeEnum loggerType, MessageTypeEnum messageType, T data, string loggerOutputPath)
         {
             VerifyDictionaryIsCreated();
@@ -352,6 +368,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
         {
             public bool Result;
             public int TraceListenerInstanceId;
+            public string NamespaceName; // 12/24/2012
         }
 
         // 6/26/2011
@@ -393,12 +410,22 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger
                 ((ILoggerOperationTypeXml)loggerOperation.Value).WriteMessageType(data);
             }
         }
-
+       
         /// <summary>
         /// Log Message Action callback for the <see cref="LoggerOperationsDictionaryAddMessage"/>.
         /// </summary>
         private static void LogMessageCallback(Lazy<ILoggerOperationType, ILoggerOperationTypeCapabilities> loggerOperation, string loggerMessage, LoggerOpDictParam result)
         {
+            loggerOperation.Value.WriteMessageType(loggerMessage);
+        }
+
+        // 12/24/2012 - Updated to set the 'Namespace' name, used in Enterprise MEF
+        /// <summary>
+        /// Log Message Action callback for the <see cref="LoggerOperationsDictionaryAddMessage"/>.
+        /// </summary>
+        private static void LogNamespaceMessageCallback(Lazy<ILoggerOperationType, ILoggerOperationTypeCapabilities> loggerOperation, string loggerMessage, LoggerOpDictParam result)
+        {
+            ((ILoggerNamespaceType)loggerOperation.Value).NamespaceName = result.NamespaceName;
             loggerOperation.Value.WriteMessageType(loggerMessage);
         }
 

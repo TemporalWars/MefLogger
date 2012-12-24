@@ -17,6 +17,9 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\Image-Nexus\Common\</ReferencePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -56,9 +59,22 @@
     <AssemblyOriginatorKeyFile>MefLoggerSn.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImageNexus.BenScharbach.Common.AttributesCodeInjector, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5cf79671efaec0aa, processorArchitecture=x86" />
+    <Reference Include="ImageNexus.BenScharbach.Common.AttributesCodeInjector, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5cf79671efaec0aa, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Image-Nexus\Common\ImageNexus.BenScharbach.Common.AttributesCodeInjector.dll</HintPath>
+    </Reference>
     <Reference Include="ImageNexus.BenScharbach.Common.LogWinEvents, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c92203e27616d8aa, processorArchitecture=x86" />
-    <Reference Include="ImageNexus.BenScharbach.Common.MEFLoggerInterfaces, Version=1.9.6.0, Culture=neutral, PublicKeyToken=c62f445c890473bb, processorArchitecture=x86" />
+    <Reference Include="ImageNexus.BenScharbach.Common.MEFLoggerInterfaces, Version=1.9.6.2, Culture=neutral, PublicKeyToken=c62f445c890473bb, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PostSharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\0Publics\PostSharp.dll</HintPath>
@@ -82,6 +98,10 @@
     <Compile Include="ConsoleParts\ConsoleLogInformationType.cs" />
     <Compile Include="ConsoleParts\ConsoleLogWarningType.cs" />
     <Compile Include="CustomAtts\ExportLoggerOperationTypeAttribute.cs" />
+    <Compile Include="EntLibLoggerParts\EntLibLoggerErrorType.cs" />
+    <Compile Include="EntLibLoggerParts\EntLibLoggerInformationType.cs" />
+    <Compile Include="EntLibLoggerParts\EntLibLoggerResultType.cs" />
+    <Compile Include="EntLibLoggerParts\EntLibLoggerWarningType.cs" />
     <Compile Include="EventLogParts\EventLogResultType.cs" />
     <Compile Include="EventLogParts\EventLogErrorType.cs" />
     <Compile Include="EventLogParts\EventLogInformationType.cs" />
@@ -118,8 +138,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy  "$(TargetDir)ImageNexus.BenScharbach.Common.MEFLogger.dll" "C:\Program Files (x86)\Image-Nexus\Common\" /F /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

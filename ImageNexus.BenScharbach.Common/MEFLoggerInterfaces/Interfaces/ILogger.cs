@@ -14,8 +14,9 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.Interfaces
         /// <param name="loggerType">Set the <see cref="LoggerTypeEnum"/> to use.</param>
         /// <param name="messageType">Set the type of <see cref="MessageTypeEnum"/> to use.</param>
         /// <param name="loggerMessage">Message to save into logger</param>
-        /// <param name="loggerOutputPath"></param>
-        void WriteItem(LoggerTypeEnum loggerType, MessageTypeEnum messageType, string loggerMessage, string loggerOutputPath);
+        /// <param name="loggerOutputPath">Sub-folder location to place logs within the 'ProgramData' folder.</param>
+        /// <param name="namespaceName">Namespace name from calling method</param>
+        void WriteItem(LoggerTypeEnum loggerType, MessageTypeEnum messageType, string loggerMessage, string loggerOutputPath, string namespaceName);
 
         // 6/26/2011
         /// <summary>
@@ -24,7 +25,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.Interfaces
         /// <param name="loggerType">Set the <see cref="LoggerTypeEnum"/> to use.</param>
         /// <param name="loggerMessage">Message to save into logger</param>
         /// <param name="result">Result of operation (true/false)</param>
-        /// <param name="loggerOutputPath"></param>
+        /// <param name="loggerOutputPath">Sub-folder location to place logs within the 'ProgramData' folder.</param>
         void WriteItem(LoggerTypeEnum loggerType, string loggerMessage, bool result, string loggerOutputPath);
 
         // 3/23/2012
@@ -34,7 +35,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.Interfaces
         /// <param name="loggerType">Set the <see cref="LoggerTypeEnum"/> to use.</param>
         /// <param name="messageType">Set the type of <see cref="MessageTypeEnum"/> to use.</param>
         /// <param name="data">Data to serialize</param>
-        /// <param name="loggerOutputPath"></param>
+        /// <param name="loggerOutputPath">Sub-folder location to place logs within the 'ProgramData' folder.</param>
         void WriteItem<T>(LoggerTypeEnum loggerType, MessageTypeEnum messageType, T data, string loggerOutputPath);
 
         /// <summary>

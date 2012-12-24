@@ -42,7 +42,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow
             InitializeComponent();
         }
 
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = true)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = true)]
         public void Event(string msg, TraceEventType eventType)
         {
             // 7/17/2011
@@ -50,7 +50,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow
         }
 
         // 7/17/2011
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = true)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = true)]
         public void TraceEvent(string source, TraceEventType eventType, int id, string message)
         {
             var messageToPass = string.Concat(source, "-", id, ":", message);
@@ -58,7 +58,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow
         }
 
         // 7/17/2011
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = false)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = false)]
         private void WriteEventMessage(string msg, TraceEventType eventType)
         {
             lock (_eventLock) // 7/4/2011
@@ -70,13 +70,13 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow
             }
         }
 
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = true)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = true)]
         public void Fail(string msg)
         {
             AddParagraph(msg, TraceEventType.Error);
         }
 
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = false)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = false)]
         private void Append(string msg)
         {
             _current.Inlines.Add(new Run(msg.TrimEnd('\n')));
@@ -90,7 +90,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow
         /// </summary>
         /// <param name="msg">Message to display</param>
         /// <param name="traceEventType"></param>
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = false)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = false)]
         private void AddParagraph(string msg, TraceEventType traceEventType)
         {
             var p = new Paragraph(new Run(msg.TrimEnd('\n')));
@@ -108,7 +108,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow
         /// </summary>
         /// <param name="traceEventType"></param>
         /// <param name="p"></param>
-        [OnGuiThread(DispatcherPriority.Normal, Asynchronous = false)]
+        [GuiThread(DispatcherPriority.Normal, Asynchronous = false)]
         private void SetStyle(TraceEventType traceEventType, Paragraph p)
         {
             switch (traceEventType)

@@ -11,5 +11,6 @@
         ConsoleLog, // 7/1/2011
         WpfConsoleLog, // 7/2/2011
         XmlWriterLog, // 3/23/2012
+        EntLibLogger, // 12/19/2012
     }
 }

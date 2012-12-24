@@ -73,7 +73,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger.StreamWriterLogParts
         }
 
         // 6/26/2011
-        [CatchAllExceptionHandling(false, null, false)]
+        [OnCatchAllExceptionHandling(false, null, false)]
         internal static void StartLogfile(string logName, string headerName = "Log Activity")
         {
             if (_loggingInProcess)
@@ -95,7 +95,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger.StreamWriterLogParts
         }
 
         // 4/9/2011
-        [CatchAllExceptionHandling(false, null, false)]
+        [OnCatchAllExceptionHandling(false, null, false)]
         public static void AddLogEvent(string logEvent)
         {
             if (_fileToSaveStream == null)
@@ -107,7 +107,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger.StreamWriterLogParts
         }
 
         // 4/9/2011
-        [CatchAllExceptionHandling(false, null, false)]
+        [OnCatchAllExceptionHandling(false, null, false)]
         public static void EndLogFile()
         {
             if (_fileToSaveStream == null) return;

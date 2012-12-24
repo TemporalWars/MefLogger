@@ -17,6 +17,9 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\Image-Nexus\Common\</ReferencePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -68,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Enums\LoggerTypeEnum.cs" />
     <Compile Include="Enums\MessageTypeEnum.cs" />
+    <Compile Include="Interfaces\ILoggerNamespaceType.cs" />
     <Compile Include="Interfaces\ILoggerOperationTypeXml.cs" />
     <Compile Include="Interfaces\ILoggerXmlWriterType.cs" />
     <Compile Include="Interfaces\ILogWindowCtl.cs" />
@@ -86,8 +90,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy  "$(TargetDir)ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.dll" "C:\Program Files (x86)\Image-Nexus\Common\" /F /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

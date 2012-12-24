@@ -21,6 +21,9 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\Image-Nexus\Common\</ReferencePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -60,9 +63,18 @@
     <AssemblyOriginatorKeyFile>MefLoggerSn.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ImageNexus.BenScharbach.Common.AttributesCodeInjector, Version=1.1.0.0, Culture=neutral, PublicKeyToken=5cf79671efaec0aa, processorArchitecture=x86" />
-    <Reference Include="ImageNexus.BenScharbach.Common.MEFLogger, Version=1.9.6.0, Culture=neutral, PublicKeyToken=c62f445c890473bb, processorArchitecture=x86" />
-    <Reference Include="ImageNexus.BenScharbach.Common.MEFLoggerInterfaces, Version=1.9.6.0, Culture=neutral, PublicKeyToken=c62f445c890473bb, processorArchitecture=x86" />
+    <Reference Include="ImageNexus.BenScharbach.Common.AttributesCodeInjector, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5cf79671efaec0aa, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Image-Nexus\Common\ImageNexus.BenScharbach.Common.AttributesCodeInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageNexus.BenScharbach.Common.MEFLogger, Version=1.9.6.1, Culture=neutral, PublicKeyToken=c62f445c890473bb, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Image-Nexus\Common\ImageNexus.BenScharbach.Common.MEFLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageNexus.BenScharbach.Common.MEFLoggerInterfaces, Version=1.9.6.1, Culture=neutral, PublicKeyToken=c62f445c890473bb, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Image-Nexus\Common\ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="PostSharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\0Publics\PostSharp.dll</HintPath>
@@ -132,6 +144,9 @@
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  "$(TargetDir)ImageNexus.BenScharbach.Common.MEFLoggerWpfWindow.dll" "C:\Program Files (x86)\Image-Nexus\Common\" /F /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

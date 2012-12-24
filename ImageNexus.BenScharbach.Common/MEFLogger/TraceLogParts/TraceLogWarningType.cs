@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using ImageNexus.BenScharbach.Common.MEFLogger.CustomAtts;
-using ImageNexus.BenScharbach.Common.MEFLogger.EventLogParts;
 using ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.Enums;
 using ImageNexus.BenScharbach.Common.MEFLoggerInterfaces.Interfaces;
 
 namespace ImageNexus.BenScharbach.Common.MEFLogger.TraceLogParts
 {
     /// <summary>
-    /// The <see cref="EventLogWarningType"/> MEF Part is used to log warning message types to windows Trace.
+    /// The <see cref="TraceLogWarningType"/> MEF Part is used to log warning message types to windows Trace.
     /// </summary>
     [ExportLoggerOperationType(MessageType = MessageTypeEnum.Warning, LoggerType = LoggerTypeEnum.TraceLog)]
     class TraceLogWarningType : ILoggerOperationType, ILoggerTraceIdType

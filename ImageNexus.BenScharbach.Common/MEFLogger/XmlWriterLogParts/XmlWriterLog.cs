@@ -80,7 +80,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger.XmlWriterLogParts
         /// Starts the creation of an XML log file.
         /// </summary>
         /// <param name="logName"></param>
-        [CatchAllExceptionHandling(false, null, false)]
+        [OnCatchAllExceptionHandling(false, null, false)]
         internal static void StartXmlLogfile(string logName)
         {
             if (_loggingInProcess)
@@ -105,7 +105,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger.XmlWriterLogParts
         }
 
         
-        [CatchAllExceptionHandling(false, null, false)]
+        [OnCatchAllExceptionHandling(false, null, false)]
         public static void AddXmlLogEvent(TData data)
         {
             if (_fileToSaveStream == null)
@@ -119,7 +119,7 @@ namespace ImageNexus.BenScharbach.Common.MEFLogger.XmlWriterLogParts
         }
 
        
-        [CatchAllExceptionHandling(false, null, false)]
+        [OnCatchAllExceptionHandling(false, null, false)]
         public static void EndXmlLogFile()
         {
             if (_fileToSaveStream == null) return;
