@@ -1,0 +1,46 @@
+<div class="wikidoc">
+<h1><font color="#0000ff">MEF Attribute Logger Tool Instructions</font></h1>
+<p>&nbsp;</p>
+<p>My MEF (Managed Extensibility Framework) Logger tool is designed as a simple way to add logging capabilities to your application.&nbsp;&nbsp; My tool requires the installation of PostSharp 2.1 code injector and Microsoft's Enterprise logger components, as
+ well as some version of Visual Studios 2010 on your computer.&nbsp; However, if you are not going to use the logging features of Enterprise logger, then you can skip the installation of this prerequisite.</p>
+<p>&nbsp;</p>
+<h3><u><font color="#c0504d">Prerequisites</font></u></h3>
+<ol type="1" style="margin-bottom:0in; font-size:11pt; font-family:calibri; unicode-bidi:embed; font-weight:normal; direction:ltr; font-style:normal; margin-left:0.375in; margin-top:0in">
+<li style="margin-bottom:0px; vertical-align:middle; margin-top:0px"><span style="font-size:11pt; font-family:calibri; font-weight:normal; font-style:normal">Visual Studio 2010</span>
+</li><li style="margin-bottom:0px; vertical-align:middle; margin-top:0px"><span style="font-size:11pt; font-family:calibri">PostSharp 2.1</span>
+</li><li style="margin-bottom:0px; vertical-align:middle; margin-top:0px"><span style="font-size:11pt; font-family:calibri">Enterprise Library 5.0 (Free)</span>
+</li></ol>
+<p>&nbsp;</p>
+<h3><span><u>Instructions</u></span></h3>
+<ol type="1" style="margin-bottom:0in; font-size:11pt; font-family:calibri; unicode-bidi:embed; font-weight:normal; direction:ltr; font-style:normal; margin-left:0.375in; margin-top:0in">
+<li style="margin-bottom:0px; vertical-align:middle; margin-top:0px"><span style="font-size:11pt; font-family:calibri; font-weight:normal; font-style:normal">Install 'MEFLogger'.</span>
+</li><li style="margin-bottom:0px; vertical-align:middle; margin-top:0px"><span style="font-size:11pt; font-family:calibri">Install 'Enterprise Library 5.0' (Optional)</span></li></ol>
+<p>&nbsp;</p>
+<h2><font color="#0000ff">How to Use:<br>
+</font></h2>
+<p>Using Visual Studios 2010, open up the application you want to update with the logging capabilities.&nbsp; Add the following four assemblies into your application, using Visual Studio's 'Add Reference' tool;</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598577"><img title="MEFLogger_AddReferences" border="0" alt="MEFLogger_AddReferences" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598578" width="474" height="310" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p>&nbsp;</p>
+<p>Then, if you are going to use Microsoft's Enterprise logger with this component, then add the following two assemblies;</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598579"><img title="MEFLogger_AddReferencesForEnterpriseLogger" border="0" alt="MEFLogger_AddReferencesForEnterpriseLogger" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598580" width="474" height="310" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p>&nbsp;</p>
+<p>If you chose the correct assemblies, your 'References' should look like the picture below;</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598581"><img title="MEFLogger_ShowsRequiredAssemblies" border="0" alt="MEFLogger_ShowsRequiredAssemblies" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598582" width="474" height="384" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p>&nbsp;</p>
+<p>For this example, I am setting up the MEF logger to use Microsoft's Enterprise logger component.&nbsp; Furthermore, since I am using custom category groups, I am going to tell the MEF logger what the names are for these groups.&nbsp; In my application, I
+ have decided to place this setting in the App.cs 'Application_StartUp' entry point.&nbsp; However, in your own application you can add this to your opening constructor method.&nbsp; The important thing to notice in the picture below is the name of category
+ groups, which you create within app.config file.<br>
+<br>
+<a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598583"><img title="MEFLogger_ShowsSettingCategoriesUsuage" border="0" alt="MEFLogger_ShowsSettingCategoriesUsuage" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598584" width="504" height="341" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p><br>
+<br>
+Next, you need to add the MEF Logger attribute to the start of your application.&nbsp; Make sure this is outside the namespace, as shown in the picture below.&nbsp; Also, verify your applications namespace is set in the 'AttributeTargetTypes' property, as shown
+ with the blue arrow.<br>
+<br>
+<a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598585"><img title="MEFLogger_ShowsSettingMEFAttribute" border="0" alt="MEFLogger_ShowsSettingMEFAttribute" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598586" width="604" height="222" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+<p><br>
+<br>
+Finally, if you want to manually log some message into the logger, use the code as shown below.&nbsp; You can place this code anywhere in your application, since the Enterprise component use 'Unity' to obtain the proper instances.&nbsp; In my example below,
+ I created the LogEntry instance, with the message I want logged into the MEF Logger.&nbsp; Then, I updated the 'Categories' to specifically tell the MEF Logger to place this message into the 'General' listener.</p>
+<p><a href="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598587"><img title="MEFLogger_ShowManualLoggingUsuage" border="0" alt="MEFLogger_ShowManualLoggingUsuage" src="http://download-codeplex.sec.s-msft.com/Download?ProjectName=meflogger&DownloadId=598588" width="611" height="297" style="border-top:0px; border-right:0px; border-bottom:0px; padding-top:0px; padding-left:0px; border-left:0px; display:inline; padding-right:0px"></a></p>
+</div><div class="ClearBoth"></div>
